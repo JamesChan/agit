@@ -1,5 +1,6 @@
 OS = alpine
 
+all: agit alpine   
 
 alpine: check
 	docker build --rm -t my/alpine alpine
@@ -16,11 +17,11 @@ agit: git
 git-env: git
 	docker run --rm -it my/git bash
 
-git: alpine
+git: alpine-cn
 	docker build --rm -t my/git git/alpine
 
 check:
 	@if ! type docker >/dev/null 2>&1; then \
 		echo >&2 "Cannot find docker, install docker first. See: http://www.docker.com"; exit 1; fi
 
-.PHONY: ubuntu java git-official git-dev agit check
+.PHONY: all ubuntu java git-official git-dev agit check
